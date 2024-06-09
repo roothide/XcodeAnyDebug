@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -e
+
+ldid -M -S/usr/bin/debugserver_xcode.entitlements /usr/bin/debugserver_xcode
+
+killall -9 lockdownd || true
