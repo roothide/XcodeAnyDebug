@@ -1,4 +1,4 @@
 # How To Build
 
-https://github.com/RootHide/Developer
+https://github.com/roothide/Developer
 
