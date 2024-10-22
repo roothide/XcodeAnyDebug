@@ -17,7 +17,7 @@ static void* _SMJobSubmit;
         {
             NSMutableArray* new_argv = [argv mutableCopy];
 
-            new_argv[0] = jbroot(@"/usr/bin/debugserver_xcode");
+            new_argv[0] = jbroot(@"/usr/bin/xcodeanydebug/debugserver");
 
             mjob[@"UserName"] = @"root";
             mjob[@"ProgramArguments"] = new_argv;

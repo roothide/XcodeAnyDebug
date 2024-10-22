@@ -2,6 +2,7 @@
 
 set -e
 
-ldid -M -S/usr/bin/debugserver_xcode.entitlements /usr/bin/debugserver_xcode
+ldid -M -S/usr/bin/xcodeanydebug/debugserver.entitlements /usr/bin/xcodeanydebug/debugserver
 
 killall -9 lockdownd || true
+killall -9 debugserver || true
