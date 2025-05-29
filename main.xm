@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
-#include <roothide.h>
-#include <dlfcn.h>
+#import <roothide.h>
+#import <dlfcn.h>
 
 static void* _SMJobSubmit;
 

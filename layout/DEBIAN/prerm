@@ -1,6 +1,5 @@
 #!/bin/bash
 
-rm -rf /usr/bin/xcodeanydebug
+rm -rf /usr/bin/xcodeanydebug /var/jb/usr/bin/xcodeanydebug || true
 
-killall -9 lockdownd || true
-killall -9 debugserver || true
+killall -9 lockdownd debugserver || true
