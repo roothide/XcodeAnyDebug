@@ -8,4 +8,4 @@ elif [ -e /var/jb/usr/bin/xcodeanydebug ]; then
     ldid -M -S/var/jb/usr/bin/xcodeanydebug/debugserver.entitlements /var/jb/usr/bin/xcodeanydebug/debugserver
 fi
 
-killall -9 lockdownd debugserver || true
+killall -9 lockdownd dtdebugproxyd debugserver || true

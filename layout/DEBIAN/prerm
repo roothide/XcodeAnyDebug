@@ -2,4 +2,4 @@
 
 rm -rf /usr/bin/xcodeanydebug /var/jb/usr/bin/xcodeanydebug || true
 
-killall -9 lockdownd debugserver || true
+killall -9 lockdownd dtdebugproxyd debugserver || true

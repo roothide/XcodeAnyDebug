@@ -1,4 +1,4 @@
-export PACKAGE_VERSION := 0.0.3
+export PACKAGE_VERSION := 1.0
 
 ARCHS := arm64 arm64e
 ifneq ($(THEOS_PACKAGE_SCHEME),)
