@@ -11,7 +11,7 @@ include $(THEOS)/makefiles/common.mk
 
 TWEAK_NAME += XcodeAnyDebug
 
-XcodeAnyDebug_FILES += main.xm
+XcodeAnyDebug_FILES += main.x
 XcodeAnyDebug_CFLAGS += -fobjc-arc
 
 include $(THEOS_MAKE_PATH)/tweak.mk

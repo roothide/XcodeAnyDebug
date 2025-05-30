@@ -2,7 +2,6 @@
 
 #import <dlfcn.h>
 #import <roothide.h>
-#import <HBLog.h>
 
 #define TAG "[XcodeAnyDebug] "
 
@@ -25,7 +24,7 @@ static void* _SMJobSubmit;
     {
         NSArray* argv = mjob[@"ProgramArguments"];
 
-        HBLogDebug(@TAG "_SMJobSubmit argv=%@", argv);
+        NSLog(@TAG "_SMJobSubmit argv=%@", argv);
 
         if ([argv[0] hasSuffix:@"/debugserver"])
         {
@@ -50,7 +49,7 @@ static void* _dtdsSpawnExecutableWithOptions;
 
 %hookf(Boolean, _dtdsSpawnExecutableWithOptions, const char *path, DTDSSpawnOptions *options, pid_t *pid, NSError **error)
 {
-    HBLogDebug(@TAG "_dtdsSpawnExecutableWithOptions path=%s", path);
+    NSLog(@TAG "_dtdsSpawnExecutableWithOptions path=%s", path);
 
     if ([[NSString stringWithUTF8String:path] hasSuffix:@"/debugserver"])
     {
@@ -74,7 +73,7 @@ static void* _dtdsSpawnExecutableWithOptions;
             break;
         }
     }
-    HBLogDebug(@TAG "isDtds=%@", isDtds ? @"YES" : @"NO");
+    NSLog(@TAG "isDtds=%@", isDtds ? @"YES" : @"NO");
     if (isDtds) {
         _dtdsSpawnExecutableWithOptions = dlsym(RTLD_DEFAULT, "dtdsSpawnExecutableWithOptions");
         %init(Dtds);
