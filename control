@@ -6,4 +6,4 @@ Description: debug any process with xcode (jailbroken required)
 Maintainer: roothide
 Author: roothide
 Section: Tweaks
-Depends: ldid, mobilesubstrate (>= 0.9.5000)
+Depends: ldid, plutil, mobilesubstrate (>= 0.9.5000)

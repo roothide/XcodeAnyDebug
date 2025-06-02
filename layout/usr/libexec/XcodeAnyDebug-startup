@@ -1,0 +1,5 @@
+#!/bin/sh
+
+launchctl unload /rootfs/System/Library/DeveloperModeLaunchDaemons/com.apple.instruments.deviceservice.plist || true
+
+launchctl load /usr/bin/xcodeanydebug/com.apple.instruments.deviceservice.plist
