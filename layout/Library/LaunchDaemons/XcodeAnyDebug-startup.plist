@@ -11,11 +11,11 @@
 	<key>ProcessType</key>
 	<string>Interactive</string>
 	<key>Program</key>
-	<string>/bin/sh</string>
+	<string>@JBROOT@/bin/sh</string>
 	<key>ProgramArguments</key>
 	<array>
-		<string>/bin/sh</string>
-		<string>/usr/libexec/XcodeAnyDebug-startup</string>
+		<string>@JBROOT@/bin/sh</string>
+		<string>@JBROOT@/usr/libexec/XcodeAnyDebug-startup</string>
 	</array>
 	<key>RunAtLoad</key>
 	<true/>

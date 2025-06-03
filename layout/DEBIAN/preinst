@@ -1,66 +1,25 @@
-#!/bin/bash
+#!@JBROOT@/bin/bash
 
 set -e
 
-if [ -f /usr/bin/xcodeanydebug ]; then
-    rm -rf /usr/bin/xcodeanydebug
+if [ -f @JBROOT@/usr/bin/xcodeanydebug ]; then
+    rm -rf @JBROOT@/usr/bin/xcodeanydebug
 fi
 
-if [ -f /var/jb/usr/bin/xcodeanydebug ]; then
-    rm -rf /var/jb/usr/bin/xcodeanydebug
-fi
+mkdir -p @JBROOT@/usr/bin/xcodeanydebug
 
-if [ -e /rootfs ]; then
-    # roothide
-    mkdir -p /usr/bin/xcodeanydebug
-
-    if [ -f /rootfs/usr/libexec/debugserver ]; then
-        # iOS 16+
-        cp /rootfs/usr/libexec/debugserver /usr/bin/xcodeanydebug/debugserver
-    elif [ -d /rootfs/Developer ] && [ "$(ls -A /rootfs/Developer)" ]; then
-        if [ -f /rootfs/Developer/usr/bin/debugserver ]; then
-            cp /rootfs/Developer/usr/bin/debugserver /usr/bin/xcodeanydebug/debugserver
-        else
-            echo -e "\n* debugserver for xcode not found on your device\n\n" >&2
-            exit 1
-        fi
+if [ -f @ROOTFS@/usr/libexec/debugserver ]; then
+    # iOS 16+
+    cp @ROOTFS@/usr/libexec/debugserver @JBROOT@/usr/bin/xcodeanydebug/debugserver
+    
+elif [ -d @ROOTFS@/Developer ] && [ "$(ls -A @ROOTFS@/Developer)" ]; then
+    if [ -f @ROOTFS@/Developer/usr/bin/debugserver ]; then
+        cp @ROOTFS@/Developer/usr/bin/debugserver @JBROOT@/usr/bin/xcodeanydebug/debugserver
     else
-        echo "* Developer Disk Image not mounted, run xcode to connect and pair your device first." >&2
-        exit 1
-    fi
-elif [ -e /var/jb ]; then
-    # rootless
-    mkdir -p /var/jb/usr/bin/xcodeanydebug
-
-    if [ -f /usr/libexec/debugserver ]; then
-        # iOS 16+
-        cp /usr/libexec/debugserver /var/jb/usr/bin/xcodeanydebug/debugserver
-    elif [ -d /Developer ] && [ "$(ls -A /Developer)" ]; then
-        if [ -f /Developer/usr/bin/debugserver ]; then
-            cp /Developer/usr/bin/debugserver /var/jb/usr/bin/xcodeanydebug/debugserver
-        else
-            echo -e "\n* debugserver for xcode not found on your device\n\n" >&2
-            exit 1
-        fi
-    else
-        echo "* Developer Disk Image not mounted, run xcode to connect and pair your device first." >&2
+        echo -e "\n* debugserver for xcode not found on your device\n\n" >&2
         exit 1
     fi
 else
-    mkdir -p /usr/bin/xcodeanydebug
-
-    if [ -f /usr/libexec/debugserver ]; then
-        # iOS 16+
-        cp /usr/libexec/debugserver /usr/bin/xcodeanydebug/debugserver
-    elif [ -d /Developer ] && [ "$(ls -A /Developer)" ]; then
-        if [ -f /Developer/usr/bin/debugserver ]; then
-            cp /Developer/usr/bin/debugserver /usr/bin/xcodeanydebug/debugserver
-        else
-            echo -e "\n* debugserver for xcode not found on your device\n\n" >&2
-            exit 1
-        fi
-    else
-        echo "* Developer Disk Image not mounted, run xcode to connect and pair your device first." >&2
-        exit 1
-    fi
+    echo "* Developer Disk Image not mounted, run xcode to connect and pair your device first." >&2
+    exit 1
 fi

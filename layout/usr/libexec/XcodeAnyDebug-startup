@@ -1,5 +1,5 @@
-#!/bin/sh
+#!@JBROOT@/bin/sh
 
-launchctl unload /rootfs/System/Library/DeveloperModeLaunchDaemons/com.apple.instruments.deviceservice.plist || true
+@JBROOT@/usr/bin/launchctl unload @ROOTFS@/System/Library/DeveloperModeLaunchDaemons/com.apple.instruments.deviceservice.plist || true
 
-launchctl load /usr/bin/xcodeanydebug/com.apple.instruments.deviceservice.plist
+@JBROOT@/usr/bin/launchctl load @JBROOT@/usr/bin/xcodeanydebug/com.apple.instruments.deviceservice.plist

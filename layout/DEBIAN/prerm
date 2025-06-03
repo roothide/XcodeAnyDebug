@@ -1,5 +1,5 @@
-#!/bin/bash
+#!@JBROOT@/bin/bash
 
-rm -rf /usr/bin/xcodeanydebug /var/jb/usr/bin/xcodeanydebug || true
+rm -rf @JBROOT@/usr/bin/xcodeanydebug || true
 
 killall -9 lockdownd dtdebugproxyd debugserver || true

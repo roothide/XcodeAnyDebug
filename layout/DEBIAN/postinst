@@ -1,28 +1,24 @@
-#!/bin/bash
+#!@JBROOT@/bin/bash
 
 set -e
 
-if [ -e /usr/bin/xcodeanydebug ]; then
-    ldid -M -S/usr/bin/xcodeanydebug/debugserver.entitlements /usr/bin/xcodeanydebug/debugserver
-elif [ -e /var/jb/usr/bin/xcodeanydebug ]; then
-    ldid -M -S/var/jb/usr/bin/xcodeanydebug/debugserver.entitlements /var/jb/usr/bin/xcodeanydebug/debugserver
-fi
+ldid -M -S@JBROOT@/usr/bin/xcodeanydebug/debugserver.entitlements @JBROOT@/usr/bin/xcodeanydebug/debugserver
 
-if [ -e /rootfs/System/Library/PrivateFrameworks/DVTInstrumentsFoundation.framework/DTServiceHub ] \
- && [ -e /rootfs/System/Library/DeveloperModeLaunchDaemons/com.apple.instruments.deviceservice.plist ]; then
+if [ -e @ROOTFS@/System/Library/PrivateFrameworks/DVTInstrumentsFoundation.framework/DTServiceHub ] \
+ && [ -e @ROOTFS@/System/Library/DeveloperModeLaunchDaemons/com.apple.instruments.deviceservice.plist ]; then
 
-    cp /rootfs/System/Library/PrivateFrameworks/DVTInstrumentsFoundation.framework/DTServiceHub /usr/bin/xcodeanydebug/DTServiceHub
-    ldid -e /rootfs/System/Library/PrivateFrameworks/DVTInstrumentsFoundation.framework/DTServiceHub > /tmp/DTServiceHub.entitlements
-    plutil -remove -key "com.apple.private.sandbox.profile:embedded" /tmp/DTServiceHub.entitlements
-    ldid -S/tmp/DTServiceHub.entitlements /usr/bin/xcodeanydebug/DTServiceHub
-    ldid -M -S/usr/bin/xcodeanydebug/DTServiceHub.entitlements /usr/bin/xcodeanydebug/DTServiceHub
+    cp @ROOTFS@/System/Library/PrivateFrameworks/DVTInstrumentsFoundation.framework/DTServiceHub @JBROOT@/usr/bin/xcodeanydebug/DTServiceHub
+    ldid -e @ROOTFS@/System/Library/PrivateFrameworks/DVTInstrumentsFoundation.framework/DTServiceHub > @JBROOT@/tmp/DTServiceHub.entitlements
+    plutil -remove -key "com.apple.private.sandbox.profile:embedded" @JBROOT@/tmp/DTServiceHub.entitlements
+    ldid -S@JBROOT@/tmp/DTServiceHub.entitlements @JBROOT@/usr/bin/xcodeanydebug/DTServiceHub
+    ldid -M -S@JBROOT@/usr/bin/xcodeanydebug/DTServiceHub.entitlements @JBROOT@/usr/bin/xcodeanydebug/DTServiceHub
 
-    cp /rootfs/System/Library/DeveloperModeLaunchDaemons/com.apple.instruments.deviceservice.plist /usr/bin/xcodeanydebug/com.apple.instruments.deviceservice.plist
-    plutil -key Program -value /usr/bin/xcodeanydebug/DTServiceHub /usr/bin/xcodeanydebug/com.apple.instruments.deviceservice.plist
-    plutil -key ProgramArguments -array /usr/bin/xcodeanydebug/com.apple.instruments.deviceservice.plist
-    plutil -key ProgramArguments -arrayadd -string "/System/Library/PrivateFrameworks/DVTInstrumentsFoundation.framework/DTServiceHub"  /usr/bin/xcodeanydebug/com.apple.instruments.deviceservice.plist
+    cp @ROOTFS@/System/Library/DeveloperModeLaunchDaemons/com.apple.instruments.deviceservice.plist @JBROOT@/usr/bin/xcodeanydebug/com.apple.instruments.deviceservice.plist
+    plutil -key Program -value "@JBROOT@/usr/bin/xcodeanydebug/DTServiceHub" @JBROOT@/usr/bin/xcodeanydebug/com.apple.instruments.deviceservice.plist
+    plutil -key ProgramArguments -array @JBROOT@/usr/bin/xcodeanydebug/com.apple.instruments.deviceservice.plist
+    plutil -key ProgramArguments -arrayadd -string "/System/Library/PrivateFrameworks/DVTInstrumentsFoundation.framework/DTServiceHub"  @JBROOT@/usr/bin/xcodeanydebug/com.apple.instruments.deviceservice.plist
 
-    /usr/libexec/XcodeAnyDebug-startup
+    @JBROOT@/usr/libexec/XcodeAnyDebug-startup
 
 fi
 
