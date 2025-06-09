@@ -25,12 +25,12 @@ XcodeAnyDebug_CFLAGS += -fobjc-arc
 include $(THEOS_MAKE_PATH)/tweak.mk
 
 before-package::
-	sed -i '' -e "s|@JBROOT@|$(JBROOT)|g" -e "s|@ROOTFS@|$(ROOTFS)|g" \
-		$(THEOS_STAGING_DIR)/DEBIAN/prerm \
-		$(THEOS_STAGING_DIR)/DEBIAN/preinst \
-		$(THEOS_STAGING_DIR)/DEBIAN/postinst \
+	for file in \
+		$(THEOS_STAGING_DIR)/DEBIAN/* \
 		$(THEOS_STAGING_DIR)/usr/libexec/XcodeAnyDebug-startup \
 		$(THEOS_STAGING_DIR)/Library/LaunchDaemons/XcodeAnyDebug-startup.plist \
-
-	
-
+	; do \
+		sed -e "s|@JBROOT@|$(JBROOT)|g" -e "s|@ROOTFS@|$(ROOTFS)|g" "$$file" > "$$file.tmp"; \
+		cat "$$file.tmp" > "$$file"; \
+		rm -f "$$file.tmp"; \
+	done
